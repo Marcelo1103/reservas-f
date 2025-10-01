@@ -170,3 +170,9 @@
     padding: 26px 18px;
   }
 }
+
+@media (max-width: 420px) {
+  .login-panel {
+    padding: 26px 18px;
+  }
+}

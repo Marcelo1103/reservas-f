@@ -4,13 +4,13 @@ import "./LoginScreen.css";
 export default function LoginScreen() {
   return (
     <div className="login-hero">
-      {/* Overlay oscuro */}
+      {}
       <div className="hero-overlay" />
 
       {/* Tarjeta */}
       <div className="login-panel">
         <h1 className="login-title">
-          <span>Login</span> Reservar Mesa
+          <span>Login</span> Reservar Mesas
         </h1>
 
         <p className="login-subtitle">El Mejor Restaurante</p>

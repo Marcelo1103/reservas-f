@@ -1,16 +1,25 @@
-# React + Vite
+CHANGELOG
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[0.1.0] - 2025-09-30
 
-Currently, two official plugins are available:
+- LoginPage.jsx: creación del componente de la página de login.
+- LoginPage.css: agregado de estilos CSS para la página de login (estructura, inputs, labels flotantes, botón y footer).
+- Fondo de imagen con overlay aplicado en la vista de login.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Changed / Refactor
+- Ajustes en la organización del proyecto para incluir la página de login como módulo independiente.
 
-## React Compiler
+Fixed
+- Corrección menor en la alineación de etiquetas (`label`) flotantes dentro de los campos de login.
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+ Chore / Config
+- Integración inicial de React Router para manejar la ruta de login.
+- Configuración de la carpeta `public/` para almacenar la imagen de fondo de la vista.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[Unreleased]
+- Implementación de validaciones avanzadas en el formulario de login.
+- Integración del login con la API de backend.
+- Módulo de registro de usuarios.
+- Manejo de autenticación y tokens en frontend.

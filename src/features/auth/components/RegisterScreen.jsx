@@ -1,8 +1,8 @@
 // src/components/Auth/RegisterScreen.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./LoginScreen.css"; // mismos estilos que login
-import { registerApi, loginApi } from "../../services/authApi";
+import "@features/auth/styles/auth.css";// mismos estilos que login
+import { registerApi, loginApi } from "../services/authApi";
 
 const MAIN_ROUTE = "/dashboard"; // cámbialo a "/" si esa es tu pantalla principal
 

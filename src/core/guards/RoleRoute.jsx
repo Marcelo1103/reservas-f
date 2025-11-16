@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { goByRole } from "../utils/roleRouting";
+import { goByRole } from "@/shared/utils/roleRouting";
 
 export default function RoleRoute({ allow, children }) {
   const token = localStorage.getItem("token");
@@ -8,7 +8,11 @@ export default function RoleRoute({ allow, children }) {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const allowed = Array.isArray(allow) ? allow : [allow];
 
-  return allowed.includes(user.rolId)
-    ? children
-    : <Navigate to={goByRole(user.rolId)} replace />;
+ // Si el rol está permitido - mostrar pantalla
+  if (allowed.includes(user.rolId)) {
+    return children;
+  }
+
+  // Si NO tiene permiso - redirigir según su rol
+  return <Navigate to={goByRole(user.rolId)} replace />;
 }

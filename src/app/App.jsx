@@ -1,4 +1,4 @@
-import LoginScreen from "./components/LoginScreen";
+import LoginScreen from "../features/auth/components/LoginScreen";
 
 function App() {
   return (

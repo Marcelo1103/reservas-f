@@ -1,13 +1,13 @@
-// src/components/Auth/RegisterScreen.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "@features/auth/styles/auth.css";// mismos estilos que login
-import { registerApi, loginApi } from "../services/authApi";
+import "@features/auth/styles/auth.css";
+import { registerApi, loginApi } from "@features/auth/services/authApi";
 
-const MAIN_ROUTE = "/dashboard"; // cámbialo a "/" si esa es tu pantalla principal
+const MAIN_ROUTE = "/dashboard";
 
 export default function RegisterScreen() {
   const navigate = useNavigate();
+
   const [form, setForm] = useState({
     nombres: "",
     apellidos: "",
@@ -15,13 +15,15 @@ export default function RegisterScreen() {
     contrasena: "",
     confirmar: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  const change = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const change = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const saveSession = (auth) => {
-    // auth = AuthResponse { usu_id, usu_nombre, usu_apellido, rol_id, token }
     localStorage.setItem("token", auth.token);
     localStorage.setItem(
       "user",
@@ -37,13 +39,15 @@ export default function RegisterScreen() {
   const onSubmit = async (e) => {
     e.preventDefault();
     setErr("");
+
     if (form.contrasena !== form.confirmar) {
       setErr("Las contraseñas no coinciden");
       return;
     }
+
     setLoading(true);
+
     try {
-      // 1) Registrar
       const { data } = await registerApi({
         nombres: form.nombres,
         apellidos: form.apellidos,
@@ -51,23 +55,23 @@ export default function RegisterScreen() {
         contrasena: form.contrasena,
       });
 
-      // 2) Si el /register ya devuelve token (tu caso), úsalo y entra
       if (data?.token) {
         saveSession(data);
         navigate(MAIN_ROUTE);
         return;
       }
 
-      // 3) Fallback: si tu /register no diera token, iniciamos sesión con las mismas credenciales
       const { data: loginData } = await loginApi({
         correo: form.correo,
         contrasena: form.contrasena,
       });
-      if (!loginData?.token) throw new Error("No se recibió token tras el registro");
+
+      if (!loginData?.token) throw new Error("No token recibido");
+
       saveSession(loginData);
       navigate(MAIN_ROUTE);
     } catch (e) {
-      setErr(e?.response?.data?.message || e.message || "Error al registrarse");
+      setErr(e?.response?.data?.message || "Error al registrarse");
     } finally {
       setLoading(false);
     }
@@ -76,12 +80,15 @@ export default function RegisterScreen() {
   return (
     <div className="login-hero">
       <div className="hero-overlay" />
+
       <div className="login-panel">
         <h1 className="login-title">
           <span>Registro</span> Reservar Mesas
         </h1>
+
         <p className="login-subtitle">Crea tu cuenta</p>
         <div className="title-underline" />
+
         <form className="login-form" onSubmit={onSubmit}>
           <input
             name="nombres"
@@ -91,6 +98,7 @@ export default function RegisterScreen() {
             onChange={change}
             required
           />
+
           <input
             name="apellidos"
             type="text"
@@ -99,6 +107,7 @@ export default function RegisterScreen() {
             onChange={change}
             required
           />
+
           <input
             name="correo"
             type="email"
@@ -107,6 +116,7 @@ export default function RegisterScreen() {
             onChange={change}
             required
           />
+
           <input
             name="contrasena"
             type="password"
@@ -115,6 +125,7 @@ export default function RegisterScreen() {
             onChange={change}
             required
           />
+
           <input
             name="confirmar"
             type="password"
@@ -123,7 +134,9 @@ export default function RegisterScreen() {
             onChange={change}
             required
           />
-          {err && <p className="error" style={{ color: "#ffb4b4" }}>{err}</p>}
+
+          {err && <p style={{ color: "#ffb4b4" }}>{err}</p>}
+
           <button type="submit" disabled={loading}>
             {loading ? "Creando cuenta..." : "Registrarme"}
           </button>

@@ -3,46 +3,64 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginScreen from "@/features/auth/components/LoginScreen";
 import RegisterScreen from "@/features/auth/components/RegisterScreen";
 
-import { PrivateGuard } from "@/core/guards/PrivateGuard";
+import UserLayout from "@features/usuario/components/UserLayout";
+import Dashboard from "@features/usuario/pages/Dashboard";
+import ReservaForm from "@features/usuario/pages/ReservaForm";
+import ReservaMesas from "@features/usuario/pages/ReservaMesas";
+import ReservaConfirmacion from "@features/usuario/pages/ReservaConfirmacion";
+import MisReservas from "@features/usuario/pages/MisReservas";
+import ReservaDetalle from "@features/usuario/pages/ReservaDetalle";
+import Perfil from "@features/usuario/pages/Perfil";
+import Notificaciones from "@features/usuario/pages/Notificaciones";
+
+import PrivateGuard from "@/core/guards/PrivateGuard";
 import RoleRoute from "@/core/guards/RoleRoute";
-
-import DashboardScreen from "@/features/dashboard/components/DashboardScreen";
-import AdminScreen from "@/features/dashboard/components/AdminScreen";
-import EmpleadoScreen from "@/features/dashboard/components/EmpleadoScreen";
-
-import { ROLES } from "@/shared/utils/roleRouting";
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* PUBLIC */}
+        {/* RUTAS PUBLICAS */}
         <Route path="/login" element={<LoginScreen />} />
-        <Route path="/registro" element={<RegisterScreen />} />
+        <Route path="/register" element={<RegisterScreen />} />
 
-        {/* PRIVATE (requiere token) */}
+        {/* 🔐 RUTAS PRIVADAS (TOKEN NECESARIO) */}
         <Route element={<PrivateGuard />}>
 
-          {/* DASHBOARD GENERAL (todas las cuentas) */}
-          <Route path="/dashboard" element={<DashboardScreen />} />
+          {/* Layout del usuario */}
+          <Route element={<UserLayout />}>
 
-          {/* SOLO ADMIN */}
+            <Route path="/dashboard" element={<Dashboard />} />
+
+            <Route path="/reservar" element={<ReservaForm />} />
+            <Route path="/reservar/mesas" element={<ReservaMesas />} />
+            <Route path="/reservar/confirmar" element={<ReservaConfirmacion />} />
+
+            <Route path="/mis-reservas" element={<MisReservas />} />
+            <Route path="/mis-reservas/:id" element={<ReservaDetalle />} />
+
+            <Route path="/perfil" element={<Perfil />} />
+            <Route path="/notificaciones" element={<Notificaciones />} />
+
+          </Route>
+
+          {/* EMPLEADO (rol = 3) */}
           <Route
-            path="/admin"
+            path="/empleado"
             element={
-              <RoleRoute allow={[ROLES.ADMIN]}>
-                <AdminScreen />
+              <RoleRoute allow={3}>
+                <h1>Dashboard Empleado</h1>
               </RoleRoute>
             }
           />
 
-          {/* SOLO EMPLEADOS */}
+          {/* ADMINISTRADOR (rol = 1) */}
           <Route
-            path="/empleado"
+            path="/admin"
             element={
-              <RoleRoute allow={[ROLES.EMPLEADO]}>
-                <EmpleadoScreen />
+              <RoleRoute allow={1}>
+                <h1>Dashboard Administrador</h1>
               </RoleRoute>
             }
           />
@@ -50,10 +68,7 @@ export default function AppRouter() {
         </Route>
 
         {/* DEFAULT */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
-
-        {/* 404 */}
-        <Route path="*" element={<h1>Página no encontrada</h1>} />
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>
   );

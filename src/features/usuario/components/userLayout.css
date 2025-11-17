@@ -1,0 +1,73 @@
+/* Layout general */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: #1f1f1f;
+  color: white;
+}
+
+/* Header */
+.layout-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  padding: 0 20px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #333;
+  z-index: 100;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid #555;
+  padding: 6px 12px;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.logout-btn:hover {
+  background: #444;
+}
+
+/* Sidebar */
+.layout-sidebar {
+  width: 220px;
+  background: #141414;
+  padding-top: 80px;
+  padding-left: 20px;
+  border-right: 1px solid #333;
+}
+
+.layout-sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.layout-sidebar li {
+  margin-bottom: 12px;
+}
+
+.layout-sidebar a {
+  color: #9ab7ff;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.layout-sidebar a.active {
+  font-weight: bold;
+  color: white;
+}
+
+/* Contenido */
+.layout-content {
+  margin-left: 220px;
+  margin-top: 70px;
+  padding: 20px;
+  width: 100%;
+}

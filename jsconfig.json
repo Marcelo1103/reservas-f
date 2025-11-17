@@ -7,7 +7,6 @@
       "@shared/*": ["src/shared/*"],
       "@core/*": ["src/core/*"],
       "@components/*": ["src/components/*"],
-      "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"]
     }
   }

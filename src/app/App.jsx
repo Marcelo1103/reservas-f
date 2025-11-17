@@ -1,11 +1,9 @@
-import LoginScreen from "../features/auth/components/LoginScreen";
+import AppRouter from "./AppRouter";
 
 function App() {
-  return (
-    <div>
-      <LoginScreen />
-    </div>
-  );
+  
+  return <AppRouter />;
+ 
 }
 
 export default App;

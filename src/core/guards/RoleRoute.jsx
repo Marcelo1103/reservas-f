@@ -6,13 +6,17 @@ export default function RoleRoute({ allow, children }) {
   if (!token) return <Navigate to="/login" replace />;
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+  // 🚨 SOLUCIÓN AL PROBLEMA
+  if (!user || !user.rolId) {
+    return <Navigate to="/login" replace />;
+  }
+
   const allowed = Array.isArray(allow) ? allow : [allow];
 
- // Si el rol está permitido - mostrar pantalla
   if (allowed.includes(user.rolId)) {
     return children;
   }
 
-  // Si NO tiene permiso - redirigir según su rol
   return <Navigate to={goByRole(user.rolId)} replace />;
 }

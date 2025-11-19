@@ -16,6 +16,12 @@ import Notificaciones from "@features/usuario/pages/Notificaciones";
 import PrivateGuard from "@/core/guards/PrivateGuard";
 import RoleRoute from "@/core/guards/RoleRoute";
 
+import EmpleadoLayout from "@/features/empleado/components/EmpleadoLayout";
+import EmpleadoDashboard from "@/features/empleado/pages/EmpleadoDashboard";
+import EmpleadoReservaDetalle from "@/features/empleado/pages/EmpleadoReservaDetalle";
+
+import AdminLayout from "@/features/administrador/components/AdminLayout";
+
 export default function AppRouter() {
   return (
     <BrowserRouter>
@@ -28,8 +34,11 @@ export default function AppRouter() {
         {/* 🔐 RUTAS PRIVADAS (TOKEN NECESARIO) */}
         <Route element={<PrivateGuard />}>
 
+          
+
           {/* Layout del usuario */}
-          <Route element={<UserLayout />}>
+          <Route element={<RoleRoute allow={2}><UserLayout /></RoleRoute>}
+            >
 
             <Route path="/dashboard" element={<Dashboard />} />
 
@@ -46,24 +55,28 @@ export default function AppRouter() {
           </Route>
 
           {/* EMPLEADO (rol = 3) */}
-          <Route
-            path="/empleado"
-            element={
-              <RoleRoute allow={3}>
-                <h1>Dashboard Empleado</h1>
-              </RoleRoute>
-            }
-          />
+           <Route   path="/empleado"
+              element={
+                <RoleRoute allow={3}>
+                  <EmpleadoLayout />
+                </RoleRoute>
+              }
+            >
+              <Route path="dashboard" element={<EmpleadoDashboard />} />
+              <Route path="reservas/:id" element={<EmpleadoReservaDetalle />} />
+          </Route>
 
           {/* ADMINISTRADOR (rol = 1) */}
           <Route
-            path="/admin"
             element={
               <RoleRoute allow={1}>
-                <h1>Dashboard Administrador</h1>
+                <AdminLayout />
               </RoleRoute>
             }
-          />
+          >
+            
+            {/* Aquí luego agregas más */}
+          </Route>
 
         </Route>
 

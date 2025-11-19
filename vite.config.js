@@ -16,8 +16,16 @@ export default defineConfig({
       "@shared": path.resolve(__dirname, "src/shared"),
       "@core": path.resolve(__dirname, "src/core"),
       "@components": path.resolve(__dirname, "src/components"),
-      "@services": path.resolve(__dirname, "src/services"),
       "@utils": path.resolve(__dirname, "src/utils"),   
+    },
+  },
+   server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:8080", // tu backend de Spring Boot
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 });

@@ -1,4 +1,66 @@
 CHANGELOG
+
+Versión 0.3.0 – 2025-11-19
+Módulo del Empleado completamente implementado
+
+Added
+- Nuevo módulo completo Empleado.
+- EmpleadoLayout.jsx con sidebar, header y navegación.
+- EmpleadoDashboard.jsx con reservas filtradas por fecha, métricas y búsqueda manual.
+- EmpleadoReservaDetalle.jsx para visualizar el detalle de una reserva con acciones futuras.
+- Componentes UI agregados: CardReserva.jsx, CardMesa.jsx, StatBox.jsx, FechaSelector.jsx.
+- Nuevo servicio empleadoApi con métodos:
+- getReservasByFecha
+- getReservaDetalle
+- Integración total en rutas:
+- Actualización de AppRouter.jsx
+- Ajustes en RoleRoute.jsx
+- Actualización de roleRouting.js
+
+Changed
+- Diseño general mejorado para soportar dashboards por rol.
+- Ajustes en controles de autenticación y navegación.
+
+Fixed
+- Corrección de bugs menores al cargar reservas.
+- Corrección de redirecciones incorrectas.
+
+Chore
+- Limpieza interna de archivos y preparación del módulo administrador.
+
+
+Versión 0.2.0 – 2025-11-17
+Módulo de Usuarios + configuración del entorno del Frontend
+
+Added
+- Nuevo módulo Users.
+- Componentes en src/features/usuario/.
+- Componentes reutilizables en src/shared/components/.
+- Integración completa de TailwindCSS y PostCSS:
+- postcss.config.js
+- tailwind.config.js
+- Nuevas rutas y estructura en AppRouter.
+- Nuevas pantallas y componentes de usuario (perfil, dashboard usuario, listados, etc.).
+
+Changed
+- Ajustes generales en:
+- App.jsx
+- PrivateGuard.jsx
+- Capa HTTP (interceptor, base URL, headers)
+- Limpieza y unificación del diseño:
+- auth.css
+- estilos globales
+
+Fixed
+- Correcciones de navegación, contexto de sesión y rol.
+
+Chore
+- Actualización de dependencias (package.json y package-lock.json).
+- Configuración optimizada de Vite y jsconfig.json.
+- Reorganización de carpetas base (estructura modular).
+
+
+
 [0.2.0] - 2025-10-08
 
 Added
